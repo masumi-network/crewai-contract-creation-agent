@@ -1,8 +1,5 @@
 # crewai-contract-creationa-gent
 
-I'll create a comprehensive README for the project.
-
-```markdown:README.md
 # Contract Creation Agent with CrewAI
 
 This project implements an intelligent contract creation system using CrewAI, which automates the process of generating and reviewing legal documents through a multi-agent approach.
