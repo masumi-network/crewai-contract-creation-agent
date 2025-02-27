@@ -1,0 +1,31 @@
+NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement (the "Agreement") is entered into as of 2024-02-27 by and between:
+
+Tech Innovations GmbH ("Company")
+and
+Max Mustermann ("Recipient")
+
+1. Definition of Confidential Information
+All intellectual property, trade secrets, customer data, and proprietary technologies
+
+2. Recipient's Obligations
+The Recipient agrees to:
+Keep all information strictly confidential, use only for business purposes, and return all materials upon request
+
+3. Term
+This Agreement shall remain in effect for 3 years from the date of execution.
+
+4. Governing Law
+This Agreement shall be governed by the laws of Germany.
+
+5. Additional Clauses
+This agreement is also binding for all subsidiaries and affiliated companies.
+
+6. Special Terms
+Any breach of this agreement will result in immediate legal action and potential damages of up to €100,000.
+
+Signatures:
+
+Company: ____________________    Recipient: ____________________
+Date: 2024-02-27                    Date: 2024-02-27
