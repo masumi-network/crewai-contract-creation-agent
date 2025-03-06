@@ -1,0 +1,29 @@
+{
+    "sections": {
+        "header": "FREELANCE SERVICE AGREEMENT\n\nThis Freelance Service Agreement (the 'Agreement') is made on {date} between {client_name}, located at {client_address} (the 'Client'), and {freelancer_name}, located at {freelancer_address} (the 'Freelancer').",
+        "services": "1. Services\nThe Freelancer shall provide the following services:\n{project_description}",
+        "payment": "2. Payment Terms\n{payment_terms}",
+        "timeline": "3. Timeline\n{delivery_timeline}",
+        "intellectual_property": "4. Intellectual Property\n{intellectual_property}",
+        "termination": "5. Termination\n{termination_clause}",
+        "jurisdiction": "6. Jurisdiction\nThis Agreement shall be governed by the laws of {jurisdiction}.",
+        "signatures": "IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first above written.\n\nClient:                                    Freelancer:\n\n_______________________                    _______________________\nName: {client_name}                       Name: {freelancer_name}\nTitle: {client_title}                     Date: _________________\nDate: _________________\n\nWitness:\n\n_______________________\nName: __________________\nDate: _________________"
+    },
+    "required_fields": [
+        "date",
+        "client_name",
+        "client_address",
+        "client_title",
+        "freelancer_name",
+        "freelancer_address",
+        "project_description",
+        "payment_terms",
+        "delivery_timeline",
+        "jurisdiction"
+    ],
+    "optional_fields": [
+        "intellectual_property",
+        "termination_clause",
+        "additional_terms"
+    ]
+} 

@@ -1,8 +1,5 @@
-# crewai-contract-creationa-gent
+# crewai-contract-creation-agent
 
-I'll create a comprehensive README for the project.
-
-```markdown:README.md
 # Contract Creation Agent with CrewAI
 
 This project implements an intelligent contract creation system using CrewAI, which automates the process of generating and reviewing legal documents through a multi-agent approach.
@@ -15,14 +12,16 @@ This project implements an intelligent contract creation system using CrewAI, wh
 - **API Interface**: FastAPI-based REST API for easy integration
 - **Database Storage**: PostgreSQL integration for contract management
 - **Docker Support**: Easy deployment with Docker and Docker Compose
+- **PDF Generation**: Automatic PDF generation with Unicode support
+- **Template Validation**: Built-in template and field validation
 
 ## 🏗️ Architecture
 
 The system uses multiple specialized agents working together:
 
-1. **Contract Writer Agent**: Creates initial contract drafts using templates
-2. **Legal Reviewer Agent**: Reviews contracts for legal compliance
-3. **Template Manager Agent**: Manages and customizes contract templates
+1. **Contract Writer Agent**: Creates initial contract drafts using templates and expands content with detailed explanations
+2. **Legal Reviewer Agent**: Reviews contracts for legal compliance across multiple jurisdictions
+3. **Template Manager Agent**: Manages and customizes contract templates with validation
 
 ## 🚀 Getting Started
 
@@ -36,8 +35,8 @@ The system uses multiple specialized agents working together:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/contract-creation-agent.git
-cd contract-creation-agent
+git clone https://github.com/yourusername/crewai-contract-creation-agent.git
+cd crewai-contract-creation-agent
 ```
 
 2. Create and configure the `.env` file:
@@ -79,13 +78,20 @@ curl -X POST http://localhost:8000/create-contract \
 -d '{
     "template_type": "nda",
     "variables": {
-        "date": "2024-02-14",
-        "company_name": "Tech Corp",
-        "recipient_name": "John Doe",
-        "confidential_info_definition": "All proprietary information",
-        "obligations": "Maintain strict confidentiality",
-        "duration": "2 years",
-        "jurisdiction": "California, USA"
+        "date": "2024-02-27",
+        "company_name": "Tech Innovations GmbH",
+        "company_address": "123 Tech Street",
+        "company_title": "Technology Company",
+        "recipient_name": "Max Mustermann",
+        "recipient_address": "456 Innovation Ave",
+        "confidential_info_definition": "All intellectual property, trade secrets, customer data, and proprietary technologies",
+        "permitted_use": "Business collaboration purposes only",
+        "duration": "3 years",
+        "jurisdiction": "Germany"
+    },
+    "customizations": {
+        "additional_clauses": "This agreement is also binding for all subsidiaries and affiliated companies",
+        "special_terms": "Any breach of this agreement will result in immediate legal action and potential damages of up to €100,000"
     }
 }'
 ```
@@ -93,34 +99,41 @@ curl -X POST http://localhost:8000/create-contract \
 ## 📁 Project Structure
 
 ```
-contract-creation-agent/
+crewai-contract-creation-agent/
 ├── src/
-│   ├── agents/           # CrewAI agents
-│   ├── tools/            # Agent tools
+│   ├── agents/           # CrewAI agents (Contract Writer, Legal Reviewer, Template Manager)
+│   ├── tools/            # Agent tools (Contract validation, review, PDF generation)
 │   ├── api/              # FastAPI application
-│   ├── config/           # Configuration
-│   └── templates/        # Contract templates
-├── .env                  # Environment variables
-├── docker-compose.yml    # Docker composition
-├── Dockerfile           # Docker build file
-└── requirements.txt     # Python dependencies
+│   ├── templates/        # Contract templates
+│   └── config/          # Configuration files
+├── contracts/           # Generated contract PDFs
+├── .env                 # Environment variables
+├── docker-compose.yml   # Docker composition
+├── Dockerfile          # Docker build file
+└── requirements.txt    # Python dependencies
 ```
 
 ## 🛠️ Available Templates
 
 1. **NDA (Non-Disclosure Agreement)**
-   - Basic confidentiality agreement
-   - Customizable terms and conditions
+   - Confidentiality terms and conditions
+   - Information usage restrictions
+   - Duration and jurisdiction specifications
+   - Customizable penalties and special terms
 
 2. **Freelance Contract**
-   - Project-based agreement
-   - Payment terms
-   - Deliverables specification
+   - Project scope and deliverables
+   - Payment terms and conditions
+   - Intellectual property rights
+   - Termination clauses
+   - Jurisdiction specifications
 
 3. **Employment Contract**
-   - Full-time employment agreement
-   - Benefits and compensation
-   - Role responsibilities
+   - Role and responsibilities
+   - Compensation and benefits
+   - Working hours and location
+   - Probation period
+   - Additional terms and conditions
 
 ## 🔧 Configuration
 
@@ -134,7 +147,7 @@ contract-creation-agent/
 The system uses PostgreSQL for storing:
 - Generated contracts
 - Contract templates
-- Contract metadata
+- Contract metadata and history
 
 ## 🤝 Contributing
 
@@ -154,8 +167,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Blockchain-based contract verification
 - Advanced template customization
 - Multi-language support
-- PDF/DOCX export functionality
+- Contract version control and history
 - Payment integration (Stripe/PayPal)
+- Contract analytics and reporting
+- Automated contract renewal notifications
 
 ## ⚠️ Disclaimer
 
@@ -164,68 +179,3 @@ This is a tool to assist in contract creation but should not replace legal couns
 ## 🤝 Support
 
 For support, please open an issue in the GitHub repository or contact the maintainers.
-```
-
-This README provides a comprehensive overview of the project, including setup instructions, usage examples, and future development plans. It's written in English and follows common documentation best practices. Would you like me to expand on any particular section?
-
-
-
-Example of Contract Request:
-
-{
-    "template_type": "nda",
-    "variables": {
-        "date": "2024-02-27",
-        "company_name": "Tech Innovations GmbH",
-        "recipient_name": "Max Mustermann",
-        "confidential_info_definition": "All intellectual property, trade secrets, customer data, and proprietary technologies",
-        "obligations": "Keep all information strictly confidential, use only for business purposes, and return all materials upon request",
-        "duration": "3 years",
-        "jurisdiction": "Germany"
-    },
-    "customizations": {
-        "additional_clauses": "This agreement is also binding for all subsidiaries and affiliated companies",
-        "special_terms": "Any breach of this agreement will result in immediate legal action and potential damages of up to €100,000"
-    }
-}
-
-
-Alternative test cases:
-Freelance Contract:
-{
-    "template_type": "freelance",
-    "variables": {
-        "date": "2024-02-27",
-        "client_name": "Digital Solutions GmbH",
-        "freelancer_name": "Anna Schmidt",
-        "project_description": "Development of a web-based CRM system",
-        "payment_terms": "€80 per hour, invoiced monthly",
-        "delivery_timeline": "3 months",
-        "jurisdiction": "Berlin, Germany"
-    },
-    "customizations": {
-        "intellectual_property": "All developed code and assets belong to the client",
-        "termination_clause": "30 days written notice required for early termination"
-    }
-}
-
-
-Employment Contract:
-{
-    "template_type": "employment",
-    "variables": {
-        "date": "2024-02-27",
-        "employer_name": "Software Solutions AG",
-        "employee_name": "Lisa Weber",
-        "position": "Senior Software Engineer",
-        "start_date": "2024-03-15",
-        "salary": "€75,000 per year",
-        "location": "Munich, Germany"
-    },
-    "customizations": {
-        "benefits": "30 days vacation, health insurance, pension plan",
-        "working_hours": "40 hours per week with flexible scheduling",
-        "probation_period": "6 months"
-    }
-}
-

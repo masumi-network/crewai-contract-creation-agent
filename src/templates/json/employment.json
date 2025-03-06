@@ -1,0 +1,27 @@
+{
+    "sections": {
+        "header": "EMPLOYMENT CONTRACT\n\nThis employment contract is entered into on {date}, between {employer_name} located at {employer_address} (hereinafter referred to as the 'Company'), and {employee_name} residing at {employee_address} (hereinafter referred to as the 'Employee').",
+        "position": "1. Position\nThe Employee shall serve as {position}. This position entails the following responsibilities:\n{responsibilities}",
+        "compensation": "2. Compensation\nThe Employee shall receive a salary of {salary} per year, payable in accordance with the Company's standard payroll practices.",
+        "duration": "3. Duration\nThis agreement shall commence on {start_date} and continue for {duration}, unless terminated earlier in accordance with this agreement.",
+        "jurisdiction": "4. Jurisdiction\nThis agreement shall be governed by the laws of {jurisdiction}."
+    },
+    "required_fields": [
+        "date",
+        "employer_name",
+        "employer_address",
+        "employee_name",
+        "employee_address",
+        "position",
+        "salary",
+        "start_date",
+        "duration",
+        "jurisdiction"
+    ],
+    "optional_fields": [
+        "responsibilities",
+        "benefits",
+        "working_hours",
+        "probation_period"
+    ]
+} 

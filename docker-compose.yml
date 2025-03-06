@@ -12,6 +12,7 @@ services:
       - db
     volumes:
       - .:/app
+      - ./contracts:/app/contracts
 
   db:
     image: postgres:15

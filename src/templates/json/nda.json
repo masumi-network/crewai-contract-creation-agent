@@ -1,0 +1,26 @@
+{
+    "sections": {
+        "header": "NON-DISCLOSURE AGREEMENT\n\nThis Non-Disclosure Agreement (the 'Agreement') is made on {date} between {company_name}, located at {company_address} (the 'Disclosing Party'), and {recipient_name}, located at {recipient_address} (the 'Receiving Party').",
+        "confidential_info": "1. Confidential Information\n{confidential_info_definition}",
+        "obligations": "2. Obligations\nThe Receiving Party agrees to:\na) Keep the Confidential Information strictly confidential\nb) Use the Confidential Information only for {permitted_use}\nc) Not disclose the Confidential Information to any third party without prior written consent",
+        "duration": "3. Duration\nThis Agreement shall remain in effect for {duration} from the date of execution.",
+        "jurisdiction": "4. Jurisdiction\nThis Agreement shall be governed by the laws of {jurisdiction}.",
+        "signatures": "IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first above written.\n\nDisclosing Party:                    Receiving Party:\n\n_______________________            _______________________\nName: {company_name}                Name: {recipient_name}\nTitle: {company_title}              Date: _________________\nDate: _________________\n\nWitness:\n\n_______________________\nName: __________________\nDate: _________________"
+    },
+    "required_fields": [
+        "date",
+        "company_name",
+        "company_address",
+        "company_title",
+        "recipient_name",
+        "recipient_address",
+        "confidential_info_definition",
+        "permitted_use",
+        "duration",
+        "jurisdiction"
+    ],
+    "optional_fields": [
+        "special_terms",
+        "additional_clauses"
+    ]
+} 
