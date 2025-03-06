@@ -168,7 +168,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Advanced template customization
 - Multi-language support
 - Contract version control and history
-- Payment integration (Stripe/PayPal)
+- Payment integration (masumi)
 - Contract analytics and reporting
 - Automated contract renewal notifications
 
