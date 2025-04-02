@@ -3,15 +3,10 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Dict
-from crewai import Crew, Task
-from src.agents.contract_writer import ContractWriterAgent
-from src.agents.legal_reviewer import LegalReviewerAgent
 from src.tools.contract_tools import ContractTools
-from src.agents.template_manager import TemplateManagerAgent
 from src.templates.base_templates import ContractTemplate
+from src.api.crew_manager import ContractCrewManager
 import os
-import json
-import re
 import datetime
 
 app = FastAPI()
@@ -23,35 +18,17 @@ class ContractRequest(BaseModel):
     template_type: str
     variables: Dict[str, str]
     customizations: Dict[str, str] = {}
+    language: str = "English"  # Default to English if not specified
 
 @app.post("/create-contract")
 async def create_contract(request: ContractRequest):
     try:
-        # Initialize agents
-        template_manager = TemplateManagerAgent()
-        contract_writer = ContractWriterAgent()
-        legal_reviewer = LegalReviewerAgent()
-        
-        # Create agents
-        template_agent = template_manager.create_agent()
-        writer_agent = contract_writer.create_agent()
-        reviewer_agent = legal_reviewer.create_agent()
-        
-        # Ensure required variables are present
-        required_variables = {
-            "employment": ["date", "employer_name", "employee_name", "position", 
-                         "salary", "start_date", "location", "jurisdiction", 
-                         "employee_address", "duties", "benefits", 
-                         "working_hours", "probation_period"],
-            "freelance": ["date", "client_name", "client_address", "client_title",
-                         "freelancer_name", "freelancer_address", "project_description",
-                         "payment_terms", "delivery_timeline", "jurisdiction"],
-            "nda": ["date", "company_name", "company_address", "company_title",
-                   "recipient_name", "recipient_address", "confidential_info_definition",
-                   "permitted_use", "duration", "jurisdiction"]
-        }
+        # Initialize crew manager
+        crew_manager = ContractCrewManager()
         
         template_type = request.template_type.lower()
+        required_variables = crew_manager.get_required_variables()
+        
         if template_type not in required_variables:
             raise HTTPException(status_code=400, detail=f"Unsupported template type: {template_type}")
             
@@ -66,9 +43,9 @@ async def create_contract(request: ContractRequest):
             raise HTTPException(status_code=400, 
                               detail=f"Missing required variables: {', '.join(missing_vars)}")
         
-        # Generate initial contract structure
+        # Generate initial contract structure using crew manager
         try:
-            initial_contract = template_manager.prepare_contract_structure(
+            initial_contract = crew_manager.prepare_contract_structure(
                 template_type,
                 request.variables,
                 request.customizations
@@ -77,30 +54,11 @@ async def create_contract(request: ContractRequest):
             print(f"Error preparing contract structure: {str(e)}")
             raise HTTPException(status_code=400, detail=f"Invalid template or variables: {str(e)}")
         
-        # Create crew with sequential tasks
-        crew = Crew(
-            agents=[template_agent, writer_agent, reviewer_agent],
-            tasks=[
-                Task(
-                    description=f"Validate the following contract structure and ensure all required fields are present:\n\n{initial_contract}",
-                    agent=template_agent,
-                    expected_output="Validation results and any required modifications to the contract structure"
-                ),
-                Task(
-                    description=f"Expand and enhance the following contract with detailed content:\n\n{initial_contract}",
-                    agent=writer_agent,
-                    expected_output="Enhanced contract content with detailed sections and professional formatting"
-                ),
-                Task(
-                    description="Review the final contract for legal compliance and completeness.",
-                    agent=reviewer_agent,
-                    expected_output="Legal review results and final contract content with compliance confirmation"
-                )
-            ]
+        # Execute the crew with language preference
+        result = crew_manager.create_and_execute_crew(
+            initial_contract,
+            language=request.language
         )
-        
-        # Execute the crew
-        result = crew.kickoff()
         
         # Generate PDF using the final contract content
         tools = ContractTools()

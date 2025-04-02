@@ -140,14 +140,7 @@ crewai-contract-creation-agent/
 ### Environment Variables
 
 - `OPENAI_API_KEY`: Your OpenAI API key
-- `DATABASE_URL`: PostgreSQL connection string
 
-### Database
-
-The system uses PostgreSQL for storing:
-- Generated contracts
-- Contract templates
-- Contract metadata and history
 
 ## 🤝 Contributing
 
